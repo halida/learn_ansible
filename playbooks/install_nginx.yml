@@ -1,0 +1,12 @@
+- name: Install nginx source
+  apt_repository:
+    # Ubuntu 16.04 (Xenial)
+    repo: deb http://nginx.org/packages/ubuntu/ xenial nginx
+    state: present
+    filename: 'nginx'
+
+- name: Install nginx
+  apt:
+    name: nginx
+    allow_unauthenticated: true
+    update_cache: yes

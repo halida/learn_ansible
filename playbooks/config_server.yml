@@ -1,0 +1,6 @@
+- name: Update repositories cache and install default packages
+  apt: name={{item}} state=installed
+  with_items:
+       - ntp
+       - tmux
+       - zsh

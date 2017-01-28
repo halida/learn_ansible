@@ -1,0 +1,33 @@
+---
+- hosts: app
+  vars:
+    http_port: 80
+    max_clients: 200
+  remote_user: root
+
+  # fix don't have python on host server
+  # gather_facts: no
+  # pre_tasks:
+  #   - name: 'install python2'
+  #     apt:
+  #       name: python-simplejson
+  #       force: true
+
+  tasks:
+  # - include: 'config_server.yml'
+  - include: 'install_nginx.yml'
+
+  - name: Upload nginx config files
+    copy:
+      src: myfiles/app.conf
+      dest: /etc/nginx/sites-available/app.conf
+  - name: Link nginx files
+    file:
+      src: /etc/nginx/sites-available/app.conf
+      dest: /etc/nginx/sites-enabled/
+      state: link
+    
+  - name: clone app files
+    copy:
+      src: myfiles/app
+      dest: /home/ubuntu/

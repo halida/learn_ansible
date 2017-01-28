@@ -1,0 +1,4 @@
+- nginx config file template
+- seperate playbook into parts:
+  - nginx
+  - default server init
